@@ -21,14 +21,14 @@ import java.util.zip.GZIPInputStream
 import java.io.ByteArrayInputStream
 
 @SpringBootApplication
-class ParserJSpiderApp
+class SpiderParserApp
 
 fun main(args: Array<String>) {
-    runApplication<ParserJSpiderApp>(*args)
+    runApplication<SpiderParserApp>(*args)
 }
 
 @RestController
-class LeonParserController(private val parser: LeonParser) {
+class SpiderParserController(private val parser: SpiderParser) {
     @GetMapping("/parse")
     @ResponseBody
     suspend fun parseData(): List<Match> = parser.parseData()
@@ -36,7 +36,7 @@ class LeonParserController(private val parser: LeonParser) {
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Component
-class LeonParser {
+class SpiderParser {
     private val sports = listOf("football", "tennis", "hockey", "basketball")
     private val client = OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
